@@ -72,7 +72,7 @@ int createNopollConnection(noPollCtx *ctx)
     connErr_endPtr = &connErr_end;
     //Retry Backoff count shall start at c=2 & calculate 2^c - 1.
 	int c=2;
-    char *conveyHeader = NULL;
+    //char *conveyHeader = NULL;
     char device_id[32]={'\0'};
     char user_agent[512]={'\0'};
     char * extra_headers = NULL;
@@ -105,14 +105,15 @@ int createNopollConnection(noPollCtx *ctx)
      ((0 != strlen(get_parodus_cfg()->hw_manufacturer)) ? get_parodus_cfg()->hw_manufacturer : "unknown"));
 
 	ParodusInfo("User-Agent: %s\n",user_agent);
-	conveyHeader = getWebpaConveyHeader();
+	//conveyHeader = getWebpaConveyHeader();
 	parStrncpy(deviceMAC, get_parodus_cfg()->hw_mac,sizeof(deviceMAC));
 	snprintf(device_id, sizeof(device_id), "mac:%s", deviceMAC);
 	ParodusInfo("Device_id %s\n",device_id);
 	
-    extra_headers = nopoll_strdup_printf("\r\nX-WebPA-Device-Name: %s"
+    /*extra_headers = nopoll_strdup_printf("\r\nX-WebPA-Device-Name: %s"
 		     "\r\nX-WebPA-Device-Protocols: wrp-0.11,getset-0.1"
-		     "\r\nUser-Agent: %s" "\r\nX-WebPA-Convey: %s",device_id,user_agent,(strlen(conveyHeader) > 0)? conveyHeader :"");
+		     "\r\nUser-Agent: %s" "\r\nX-WebPA-Convey: %s",device_id,user_agent,(strlen(conveyHeader) > 0)? conveyHeader :""); */
+	extra_headers = nopoll_strdup_printf("\r\nX-WebPA-Device-Name: %s",device_id);
 	
 	do
 	{
