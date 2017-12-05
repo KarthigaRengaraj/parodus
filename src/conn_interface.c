@@ -84,7 +84,7 @@ void createSocketConnection(void *config_in, void (* initKeypress)())
         nopoll_loop_wait(ctx, 5000000);
         intTimer = intTimer + 5;
 
-/*      if(heartBeatTimer >= get_parodus_cfg()->webpa_ping_timeout) 
+      if(heartBeatTimer >= get_parodus_cfg()->webpa_ping_timeout) 
         {
             if(!close_retry) 
             {
@@ -108,7 +108,7 @@ void createSocketConnection(void *config_in, void (* initKeypress)())
             heartBeatTimer += HEARTBEAT_RETRY_SEC;	
             intTimer = 0;		
         }
-*/
+
         if( false == seshat_registered ) {
             seshat_registered = __registerWithSeshat();
         }
